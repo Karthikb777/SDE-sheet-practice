@@ -6,7 +6,7 @@ package com.karthik.cp;
 *                       1 if n == 0
 *                       ( a ^ (n/2) ) ^ 2  if n > 0 and n is even
 *                       ( ( a ^ ((n - 1) / 2) ) ^ 2 ) * a if n > 0 and n is odd
-* here is the iterative implementation
+*       Here is the iterative implementation
 * */
 
 public class BinaryExponential {
