@@ -1,47 +1,53 @@
+/* package codechef; // don't place package name! */
 package com.karthik.cp;
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 
-//  preferred way of io in cp in java
-public class fastio {
-    static class fastReader {
+/* Name of the class has to be "Main" only if the class is public. */
+class fastio
+{
+    static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 
-        public fastReader() {
-            br = new BufferedReader(new InputStreamReader(System.in));
+        public FastReader()
+        {
+            br = new BufferedReader(
+                    new InputStreamReader(System.in));
         }
 
-        String next() {
+        String next()
+        {
             while (st == null || !st.hasMoreElements()) {
                 try {
                     st = new StringTokenizer(br.readLine());
                 }
-                catch(IOException e) {
+                catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             return st.nextToken();
         }
 
-        int nextInt() {
-            return Integer.parseInt(next());
-        }
+        int nextInt() { return Integer.parseInt(next()); }
 
-        long nextLong() {
-            return Long.parseLong(next());
-        }
+        long nextLong() { return Long.parseLong(next()); }
 
-        double nextDouble() {
+        double nextDouble()
+        {
             return Double.parseDouble(next());
         }
 
-        String nextLine() {
+        String nextLine()
+        {
             String str = "";
             try {
                 str = br.readLine();
@@ -53,26 +59,55 @@ public class fastio {
         }
     }
 
-    public static int binExp(int a, int b) {
-        int res = 1;
-        while (b > 0) {
-            if((b & 1) != 0) res = res * a;
-            b = b >> 1;
-            a = a*a;
+    public static int minOperations(int n, int k, int[] a) {
+        int min = 0;
+
+        int x = 1;
+        int flag = 1;
+
+        int p = 0;
+        int ind = 0;
+
+        while(flag < a.length) {
+
+            for(int i = ind; i < p && p <=k; i++) {
+                int y = (int) Math.pow(2, p);
+                a[i] = a[i] ^ y;
+                p++;
+                if(a[i] == 0) {
+                    flag++;
+                    min++;
+                    p--;
+                    ind = i;
+                }
+            }
+
         }
-        return res;
+        p++;
+
+
+        return min;
     }
 
+    public static void main (String[] args) throws java.lang.Exception
+    {
+        FastReader fr = new FastReader();
+        int t = fr.nextInt();
+        while(t-- > 0) {
+            // your code goes here
+            int n = fr.nextInt();
+            int k = fr.nextInt();
 
-    public static void main(String[] args) {
-        int a = 9;
-        int b = 5;
+            int[] arr = new int[n];
 
-        int x = 0b1100;
-        int y = 0b0001;
-        System.out.println(x&y);
+            for(int i = 0; i < n; i++) {
+                arr[i] = fr.nextInt();
+            }
 
-//        int c = binExp(a, b);
-//        System.out.println(c);
+            int minOp = minOperations(n, k, arr);
+            System.out.println(minOp);
+
+        }
+
     }
 }
