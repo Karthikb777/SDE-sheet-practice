@@ -9,27 +9,41 @@ public class problemDifficulty {
 
     public static int noOfSets(int[] diff) {
 //        generate all combinations
-        HashMap<Integer, Integer> map = new HashMap<>();
+        HashSet<int[]> set = new HashSet<>();
 
         for (int i = 0; i < diff.length; i++) {
             for (int j = 0; j < diff.length; j++) {
-                if (i != j) {
-                    int a = diff[i];
-                    int b = diff[j];
-
+                if (diff[i] != diff[j]) {
+                    int[] a = {diff[i], diff[j]};
+                    set.add(a);
                 }
             }
         }
-//        for (int[] set: sets) {
-//            for (int i: set) {
-//                System.out.print(i + " ");
-//            }
-//            System.out.println();
-//        }
-        return 0;
+
+        ArrayList<Integer> vis = new ArrayList<>();
+        int count = 0;
+        HashSet<int[]> x = new HashSet<>();
+
+        for (int[] s: set) {
+            if (!(vis.contains(s[0]) && vis.contains(s[1]))) {
+                count++;
+                vis.add(s[0]);
+                vis.add(s[1]);
+                x.add(new int[]{s[0], s[1]});
+            }
+        }
+
+        for (int[] a : x) {
+            for (int i : a) {
+                System.out.print(i + " ");
+            }
+            System.out.println();
+        }
+
+        return count;
     }
     public static void main(String[] args) {
-        int[] diff = {1 ,2, 3, 4};
-        noOfSets(diff);
+        int[] diff = {1 ,4, 3, 2};
+        System.out.println(noOfSets(diff));
     }
 }
