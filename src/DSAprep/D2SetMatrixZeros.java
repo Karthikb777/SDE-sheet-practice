@@ -5,6 +5,7 @@ import java.util.Arrays;
 /*
 *       given a nxn matrix, if an element is 0, set it's entire row and column to zero. do it in place.
 * */
+
 public class D2SetMatrixZeros {
 //    optimized
     public static void method2(int[][] matrix) {

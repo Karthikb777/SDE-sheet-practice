@@ -59,34 +59,28 @@ class fastio
         }
     }
 
-    public static int minOperations(int n, int k, int[] a) {
-        int min = 0;
+    public static boolean isSqrt(int n) {
+        int sqrt = (int) Math.sqrt(n);
+        int res = sqrt * sqrt;
+        return (res == n);
+    }
 
-        int x = 1;
-        int flag = 1;
+    public static long megaSquare(int n, int a) {
+        if(n == 0) return 0;
+        if(n == 1) return 1;
+        long x = 0;
 
-        int p = 0;
-        int ind = 0;
-
-        while(flag < a.length) {
-
-            for(int i = ind; i < p && p <=k; i++) {
-                int y = (int) Math.pow(2, p);
-                a[i] = a[i] ^ y;
-                p++;
-                if(a[i] == 0) {
-                    flag++;
-                    min++;
-                    p--;
-                    ind = i;
-                }
+        if(isSqrt(n)) x = n;
+        else {
+            while (!isSqrt(n)) {
+                x = n;
+                n--;
             }
-
+            x--;
         }
-        p++;
 
-
-        return min;
+        long res = (long) Math.sqrt(x) * a;
+        return res;
     }
 
     public static void main (String[] args) throws java.lang.Exception
@@ -94,19 +88,9 @@ class fastio
         FastReader fr = new FastReader();
         int t = fr.nextInt();
         while(t-- > 0) {
-            // your code goes here
             int n = fr.nextInt();
-            int k = fr.nextInt();
-
-            int[] arr = new int[n];
-
-            for(int i = 0; i < n; i++) {
-                arr[i] = fr.nextInt();
-            }
-
-            int minOp = minOperations(n, k, arr);
-            System.out.println(minOp);
-
+            int a = fr.nextInt();
+            System.out.println(megaSquare(n, a));
         }
 
     }
