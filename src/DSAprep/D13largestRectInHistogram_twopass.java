@@ -1,5 +1,37 @@
 package DSAprep;
 
+/*
+*       largest rectangle in histogram:
+*           given an array representing a histogram, find the area of the largest rectangle
+*
+*           two pass method:
+*               find the left smallest element for all indices of the array
+*               find the right smallest element for all the indices of the array
+*               find the largest rectangle area by doing the calculation as follows:
+*                   area = [ rightSmallest - leftSmallest + 1 ] * arr[i]
+*               return the max area
+*
+*               use the next greater element approach to find the left and right smaller element for each array element
+*               in the stack, store the indices of the elements instead of the elements themselves
+*               insert the index into the leftSmaller and rightSmaller arrays
+*
+*               TC - O(n) + O(n) for computing the left smaller elements
+*                  + O(n) + O(n) for computing the right smaller elements
+*                  + O(n) for computing the area for every element in the array
+*                   = O(5n) = O(n)
+*
+*               O(n) + O(n) for computing each smaller element is because, O(n) for iteration and another O(n)
+*               for pushing and popping elements from the stack [worst case, we have to do n poppings from the stack]
+*
+*               an optimization can be made that is to calculate the area in the right smaller element loop only, which
+*               reduces the complexity to O(4n)
+*
+*               SC - O(n) + O(n) to store the left and right smaller elements
+*
+*               another method that can compute the max area in one pass exists and is done in a separate problem to avoid confusions
+*
+* */
+
 import java.util.Stack;
 
 public class D13largestRectInHistogram_twopass {
@@ -43,6 +75,9 @@ public class D13largestRectInHistogram_twopass {
             int area = (rightSmallest[i] - leftSmallest[i] + 1) * histogram[i];
             maxArea = Math.max(maxArea, area);
         }
+
+//        an optimization can be made to compute the area in the right smaller element loop only, thereby eliminating one for loop entirely
+//        that optimization is not done here.
 
         return maxArea;
     }

@@ -130,6 +130,7 @@ class testLRU {
         System.out.print("enter size of cache: ");
 
         D13LRUcache lru = new D13LRUcache(scanner.nextInt());
+//       scanner.next
 
         int select = 0;
         while(select != 3) {
